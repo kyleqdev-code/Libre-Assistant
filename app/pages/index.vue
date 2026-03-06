@@ -1,5 +1,10 @@
 <template>
   <div class="chat-section">
+    <FirstTimeSetup
+      :is-visible="showFirstTimeSetup"
+      :settings-manager="settingsManager"
+      @close="showFirstTimeSetup = false"
+    />
     <div class="chat-column">
       <ChatPanel
         ref="chatPanelRef"
@@ -50,6 +55,7 @@ import { useConversation } from '~/composables/useConversation';
 import { useGlobalScrollStatus } from '~/composables/useGlobalScrollStatus';
 
 import ChatPanel from '~/components/ChatPanel.vue';
+import FirstTimeSetup from '~/components/FirstTimeSetup.vue';
 
 // Get the route
 const route = useRoute();
@@ -111,14 +117,18 @@ async function sendMessage(message, originalMessage = null, attachments = []) {
 
 const messageFormRef = ref(null); // Reference to the MessageForm component
 const chatPanelRef = ref(null); // Reference to the ChatPanel component
+const showFirstTimeSetup = ref(false); // Show first-time setup modal
 
 // Use global scroll status instead of local ref
 const { setIsScrolledTop } = useGlobalScrollStatus();
 
 onMounted(async () => {
   await settingsManager.loadSettings();
-  // No manual default setting needed here as Settings class handles it now
-
+  
+  // Check if this is the first time using the app
+  if (!settingsManager.settings.user_name) {
+    showFirstTimeSetup.value = true;
+  }
 
   // Set the chat panel reference (used by useConversation for scrollToEnd, etc.)
   setChatPanel(chatPanelRef.value);

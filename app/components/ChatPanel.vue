@@ -574,7 +574,7 @@ defineExpose({ scrollToEnd, isAtBottom, chatWrapper });
         </div>
         <div class="privacy-note">
           <p class="privacy-note-text">
-            <strong>Fun Fact:</strong> Official ChatGPT, Claude, and Gemini platforms (websites & apps) use your personal conversations and personal data to train future models. As a result, there is a small but nonzero risk that models may regurgitate information from their training data that includes your personal information. We DO NOT train AI on your conversations, ever.
+            <strong>Fun Fact:</strong> Official ChatGPT, Claude, and Gemini platforms (websites & apps) use your personal conversations and personal data to train future models. As a result, there is a small but nonzero risk that models may regurgitate information from their training data that includes your personal information. We NEVER train AI on ANY of your conversations.
           </p>
         </div>
       </div>
