@@ -34,6 +34,8 @@
  * | Model routing           | disabled     | {} (original model)             |
  */
 
+import mathModeSystemPrompt from './mathModeSystemPrompt.md?raw';
+
 export const DEFAULT_MODEL_ID = "openai/gpt-5-mini";
 
 /**
@@ -366,7 +368,8 @@ export const availableModels = [
           defaultTemperature: 0,
           imageModel: "google/gemini-3-flash",
           imageTemperature: 1.0,
-          imageEffort: "high"
+          imageEffort: "high",
+          systemPrompt: mathModeSystemPrompt
         }
       },
       {
