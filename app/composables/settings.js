@@ -25,19 +25,20 @@ class Settings {
       selected_model_id: DEFAULT_MODEL_ID, // Default model ID
 
       // --- Search Settings ---
-      search_enabled: false, // Whether search is enabled by default
+      search_enabled: true, // Whether search is enabled by default
 
-      // --- Model-Specific Settings ---
-      model_settings: {}, // Per-model settings storage
-
-      // --- Parameter Config Settings ---
-      parameter_config: { ...DEFAULT_PARAMETERS },
-
-      // --- GPT-OSS Specific Settings ---
-      gpt_oss_limit_tables: false, // Whether to limit table usage for GPT-OSS models
+      // --- UI Settings ---
+      theme_mode: 'light', // Default to light mode for visuals
 
       // --- API Key Settings ---
       custom_api_key: '', // User's own Hack Club API key (bypasses rate limits)
+
+      // --- Advanced Developer Settings ---
+      show_custom_api_key: false, // Hide custom API key input
+
+      // --- System Prompts ---
+      system_prompt_general: null, // System prompt for general mode
+      system_prompt_math: null, // System prompt for math mode
     });
 
     // Add type information for better type safety
@@ -46,13 +47,16 @@ class Settings {
     // Create a non-reactive copy of default settings to avoid circular references
     this.defaultSettings = {
       version: 2,
-      global_memory_enabled: true, // Add default value for global memory
-      selected_model_id: DEFAULT_MODEL_ID, // Default model ID
-      search_enabled: false, // Default value for search setting
-      model_settings: {}, // Default value for model settings
+      global_memory_enabled: true,
+      selected_model_id: DEFAULT_MODEL_ID,
+      search_enabled: true,
+      theme_mode: 'light',
+      model_settings: {},
       parameter_config: { ...DEFAULT_PARAMETERS },
-      gpt_oss_limit_tables: false, // Default value for GPT-OSS table limiting
-      custom_api_key: '', // Default empty API key
+      custom_api_key: '',
+      show_custom_api_key: false,
+      system_prompt_general: null,
+      system_prompt_math: null,
     };
 
     // Load settings asynchronously

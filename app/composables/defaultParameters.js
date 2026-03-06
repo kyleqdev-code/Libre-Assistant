@@ -5,7 +5,7 @@
 
 export const DEFAULT_PARAMETERS = {
   temperature: 1.0,
-  top_p: 0.95,
+  top_p: null,
   seed: null,
   grounding: false
 };

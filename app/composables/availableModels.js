@@ -34,7 +34,7 @@
  * | Model routing           | disabled     | {} (original model)             |
  */
 
-export const DEFAULT_MODEL_ID = "moonshotai/kimi-k2.5";
+export const DEFAULT_MODEL_ID = "openai/gpt-5-mini";
 
 /**
  * Normalizes legacy reasoning formats to the new schema
@@ -340,19 +340,6 @@ export const availableModels = [
     logo: "/ai_logos/openai.svg",
     models: [
       {
-        id: "openai/gpt-oss-120b",
-        name: "GPT OSS 120B",
-        description: "High-performance open-weights model with exceptional STEM capabilities.",
-        reasoning: {
-          supported: true,
-          toggleable: false,
-          effort: {
-            levels: ['low', 'medium', 'high'],
-            default: 'medium'
-          }
-        },
-      },
-      {
         id: "openai/gpt-5-mini",
         name: "GPT-5 Mini",
         description: "Streamlined version of GPT-5 optimized for lightweight tasks.",
@@ -365,25 +352,39 @@ export const availableModels = [
           }
         },
       },
-    ],
-  },
-  {
-    category: "Perplexity",
-    logo: "/ai_logos/perplexity.svg",
-    models: [
       {
-        id: "perplexity/sonar-deep-research",
-        name: "Sonar Deep Research",
-        description: "Searches and reasons across sources to generate comprehensive reports.",
-        tool_use: true,
+        id: "math-mode",
+        name: "Math Mode",
+        description: "Leverages state of the art models and superior configurations to outperform ChatGPT.",
         reasoning: {
           supported: true,
-          toggleable: true,
-          defaultEnabled: true
+          toggleable: false
+        },
+        isMathMode: true,
+        mathModeConfig: {
+          defaultModel: "deepseek/deepseek-v3.2-speciale",
+          defaultTemperature: 0,
+          imageModel: "google/gemini-3-flash",
+          imageTemperature: 1.0,
+          imageEffort: "high"
+        }
+      },
+      {
+        id: "openai/gpt-oss-120b",
+        name: "GPT OSS 120B",
+        description: "High-performance open-weights model with exceptional STEM capabilities.",
+        reasoning: {
+          supported: true,
+          toggleable: false,
+          effort: {
+            levels: ['low', 'medium', 'high'],
+            default: 'medium'
+          }
         },
       },
     ],
   },
+
   {
     category: "Qwen",
     logo: "/ai_logos/qwen.svg",
