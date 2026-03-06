@@ -53,7 +53,7 @@ import 'highlight.js/styles/github-dark.css';
 import { inject } from "@vercel/analytics"
 import { injectSpeedInsights } from '@vercel/speed-insights';
 import { useDark, useMagicKeys, whenever } from "@vueuse/core";
-import { useHead } from '@unhead/vue';
+import { useHead } from '#app';
 import { DialogRoot, DialogContent, DialogPortal, DialogOverlay } from 'reka-ui';
 import { useRoute, useRouter } from 'vue-router';
 
