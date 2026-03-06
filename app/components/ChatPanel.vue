@@ -574,7 +574,7 @@ defineExpose({ scrollToEnd, isAtBottom, chatWrapper });
         </div>
         <div class="privacy-note">
           <p class="privacy-note-text">
-            <strong>Privacy Notice:</strong> Official ChatGPT, Claude, and Gemini platforms use your conversations and personal data to train future models. While Libre Assistant does not train on your data, there is a very small but nonzero risk that large language models may regurgitate information from their training data. For sensitive information, consider what you share across all AI platforms.
+            <strong>Fun Fact:</strong> Official ChatGPT, Claude, and Gemini platforms (websites & apps) use your personal conversations and personal data to train future models. As a result, there is a small but nonzero risk that models may regurgitate information from their training data that includes your personal information. We DO NOT train AI on your conversations, ever.
           </p>
         </div>
       </div>
