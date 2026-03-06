@@ -199,6 +199,24 @@ export function findModelById(models, id) {
 
 export const availableModels = [
   {
+    id: "math-mode",
+    name: "Math Mode",
+    description: "Leverages state of the art models and superior configurations to outperform ChatGPT.",
+    reasoning: {
+      supported: true,
+      toggleable: false
+    },
+    isMathMode: true,
+    mathModeConfig: {
+      defaultModel: "deepseek/deepseek-v3.2-speciale",
+      defaultTemperature: 0,
+      imageModel: "google/gemini-3-flash",
+      imageTemperature: 1.0,
+      imageEffort: "high",
+      systemPrompt: mathModeSystemPrompt
+    }
+  },
+  {
     category: "DeepSeek",
     logo: "/ai_logos/deepseek.svg",
     models: [
@@ -353,24 +371,6 @@ export const availableModels = [
             default: 'medium'
           }
         },
-      },
-      {
-        id: "math-mode",
-        name: "Math Mode",
-        description: "Leverages state of the art models and superior configurations to outperform ChatGPT.",
-        reasoning: {
-          supported: true,
-          toggleable: false
-        },
-        isMathMode: true,
-        mathModeConfig: {
-          defaultModel: "deepseek/deepseek-v3.2-speciale",
-          defaultTemperature: 0,
-          imageModel: "google/gemini-3-flash",
-          imageTemperature: 1.0,
-          imageEffort: "high",
-          systemPrompt: mathModeSystemPrompt
-        }
       },
       {
         id: "openai/gpt-oss-120b",
