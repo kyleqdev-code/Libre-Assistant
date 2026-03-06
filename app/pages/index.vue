@@ -46,8 +46,7 @@ import 'highlight.js/styles/github-dark.css';
 import { inject } from "@vercel/analytics"
 import { injectSpeedInsights } from '@vercel/speed-insights';
 import { useDark } from "@vueuse/core";
-import { useRoute, useRouter } from '#app';
-import { useHead } from '@unhead/vue';
+import { useRoute, useRouter, useHead } from '#app';
 
 import { availableModels } from '~/composables/availableModels';
 import { useSettings } from '~/composables/useSettings';
