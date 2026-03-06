@@ -5,8 +5,7 @@
  * @version 3.0.0
  */
 
-// --- PROMPT MODULES ---
-// These are the "Lego" blocks that will be assembled into the final prompt.
+import { SYSTEM_PROMPT_GENERAL, SYSTEM_PROMPT_MATH } from './systemPrompts';
 
 const CORE_IDENTITY = `You are Libre, a helpful and capable AI assistant from the open-source Libre Assistant project. Your goal is to provide clear, accurate, and useful responses. Your underlying model is NOT called 'Libre' nor is it developed by Libre Assistant; you are developed by a third-party and integrated into Libre Assistant through OpenRouter. Current date is ${new Date().toISOString().split("T")[0]}`;
 
@@ -82,6 +81,8 @@ const TABLE_LIMITATION_GUIDELINES = `### Table Usage Guidelines
  * @param {string} [settings.occupation] - The user's occupation.
  * @param {string} [settings.custom_instructions] - Custom instructions from the user.
  * @param {string} [settings.selected_model_id] - The selected model ID.
+ * @param {string} [settings.system_prompt_general] - Custom general system prompt.
+ * @param {string} [settings.system_prompt_math] - Custom math mode system prompt.
  * @param {boolean} [settings.gpt_oss_limit_tables] - Whether to limit table usage for GPT-OSS models.
  * @param {string[]} [memoryFacts=[]] - Array of memory facts about the user.
  * @param {boolean} [isIncognito=false] - Whether incognito mode is enabled.
@@ -95,6 +96,88 @@ export async function generateSystemPrompt(
   isIncognito = false,
   hasToolUse = true
 ) {
+  // Check if math mode is selected and use the math-specific prompt
+  const isMathMode = settings.selected_model_id === 'math-mode';
+  const customMathPrompt = settings.system_prompt_math;
+  const customGeneralPrompt = settings.system_prompt_general;
+  
+  // If using math mode with a custom math prompt, use it as the base
+  if (isMathMode && customMathPrompt) {
+    // Start with the custom math prompt
+    let basePrompt = customMathPrompt;
+    
+    // Add user context if available
+    if (settings.user_name || settings.occupation) {
+      let userContext = "\n### Your User\n";
+      if (settings.user_name && settings.occupation) {
+        userContext += `You are talking to a user who has set their name globally to: ${settings.user_name} and their occupation globally to: ${settings.occupation}.`;
+      } else if (settings.user_name) {
+        userContext += `You are talking to a user who has set their name globally to: ${settings.user_name}.`;
+      } else {
+        userContext += `You are talking to a user who has set their occupation globally to: ${settings.occupation}.`;
+      }
+      basePrompt += userContext;
+    }
+    
+    // Add memory if enabled
+    if (settings.global_memory_enabled && memoryFacts.length > 0) {
+      const memorySection = `\n### User Memory\nThe following are facts about the user generated from the user's other conversations:\n<context>\n${memoryFacts.map((fact) => `- ${fact}`).join("\n")}\n</context>`;
+      basePrompt += memorySection;
+    }
+    
+    // Add tools if available
+    if (toolNames.length > 0) {
+      const toolsSection = `\n### Available Tools\nYou have access to these tools: **${toolNames.join(", ")}**. Use them when they can help you fulfill the user's request.`;
+      basePrompt += toolsSection;
+    }
+    
+    // Add custom instructions if provided
+    if (settings.custom_instructions) {
+      const customInstructionsSection = `\n### Important User Instructions\nAlways follow these instructions from the user. **If any of these instructions conflict with the guidelines above, you must prioritize these instructions.**\n---\n${settings.custom_instructions}`;
+      basePrompt += customInstructionsSection;
+    }
+    
+    return basePrompt;
+  }
+  
+  // If custom general prompt is provided, use it
+  if (customGeneralPrompt) {
+    let basePrompt = customGeneralPrompt;
+    
+    // Add user context if available
+    if (settings.user_name || settings.occupation) {
+      let userContext = "\n### Your User\n";
+      if (settings.user_name && settings.occupation) {
+        userContext += `You are talking to a user who has set their name globally to: ${settings.user_name} and their occupation globally to: ${settings.occupation}.`;
+      } else if (settings.user_name) {
+        userContext += `You are talking to a user who has set their name globally to: ${settings.user_name}.`;
+      } else {
+        userContext += `You are talking to a user who has set their occupation globally to: ${settings.occupation}.`;
+      }
+      basePrompt += userContext;
+    }
+    
+    // Add memory if enabled
+    if (settings.global_memory_enabled && memoryFacts.length > 0) {
+      const memorySection = `\n### User Memory\nThe following are facts about the user generated from the user's other conversations:\n<context>\n${memoryFacts.map((fact) => `- ${fact}`).join("\n")}\n</context>`;
+      basePrompt += memorySection;
+    }
+    
+    // Add tools if available
+    if (toolNames.length > 0) {
+      const toolsSection = `\n### Available Tools\nYou have access to these tools: **${toolNames.join(", ")}**. Use them when they can help you fulfill the user's request.`;
+      basePrompt += toolsSection;
+    }
+    
+    // Add custom instructions if provided
+    if (settings.custom_instructions) {
+      const customInstructionsSection = `\n### Important User Instructions\nAlways follow these instructions from the user. **If any of these instructions conflict with the guidelines above, you must prioritize these instructions.**\n---\n${settings.custom_instructions}`;
+      basePrompt += customInstructionsSection;
+    }
+    
+    return basePrompt;
+  }
+  
   // Start with the core identity and main principles.
   const promptSections = [CORE_IDENTITY];
 

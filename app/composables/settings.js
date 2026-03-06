@@ -2,6 +2,7 @@ import localforage from "localforage";
 import { reactive } from "vue";
 import { availableModels, findModelById, DEFAULT_MODEL_ID } from './availableModels';
 import DEFAULT_PARAMETERS from './defaultParameters';
+import { SYSTEM_PROMPT_GENERAL, SYSTEM_PROMPT_MATH } from './systemPrompts';
 
 /**
  * Manages application settings for the Libre Assistant Interface.
@@ -37,8 +38,8 @@ class Settings {
       show_custom_api_key: false, // Hide custom API key input
 
       // --- System Prompts ---
-      system_prompt_general: null, // System prompt for general mode
-      system_prompt_math: null, // System prompt for math mode
+      system_prompt_general: SYSTEM_PROMPT_GENERAL, // System prompt for general mode
+      system_prompt_math: SYSTEM_PROMPT_MATH, // System prompt for math mode
     });
 
     // Add type information for better type safety
@@ -55,8 +56,8 @@ class Settings {
       parameter_config: { ...DEFAULT_PARAMETERS },
       custom_api_key: '',
       show_custom_api_key: false,
-      system_prompt_general: null,
-      system_prompt_math: null,
+      system_prompt_general: SYSTEM_PROMPT_GENERAL,
+      system_prompt_math: SYSTEM_PROMPT_MATH,
     };
 
     // Load settings asynchronously
