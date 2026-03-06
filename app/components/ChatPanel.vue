@@ -572,6 +572,11 @@ defineExpose({ scrollToEnd, isAtBottom, chatWrapper });
             This chat won't be stored and will not use Libre's memory or personalization features.
           </p>
         </div>
+        <div class="privacy-note">
+          <p class="privacy-note-text">
+            <strong>Privacy Notice:</strong> Official ChatGPT, Claude, and Gemini platforms use your conversations and personal data to train future models. While Libre Assistant does not train on your data, there is a very small but nonzero risk that large language models may regurgitate information from their training data. For sensitive information, consider what you share across all AI platforms.
+          </p>
+        </div>
       </div>
       <div class="messages-layer">
         <template v-for="message in messages" :key="message.id">
@@ -808,6 +813,31 @@ defineExpose({ scrollToEnd, isAtBottom, chatWrapper });
 }
 
 .dark .incognito-description {
+  color: var(--text-secondary-dark);
+}
+
+.privacy-note {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  background-color: var(--bg-secondary-light);
+  border-left: 4px solid var(--accent-light);
+  border-radius: 0.5rem;
+}
+
+.dark .privacy-note {
+  background-color: var(--bg-secondary-dark);
+  border-left-color: var(--accent-dark);
+}
+
+.privacy-note-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary-light);
+  margin: 0;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.dark .privacy-note-text {
   color: var(--text-secondary-dark);
 }
 
